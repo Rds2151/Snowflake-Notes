@@ -19,17 +19,18 @@ A virtual warehouse in Snowflake is a `cluster of compute resources` that you ca
     Snowpark-optimized warehouses which provide `16x memory per node` compared to a standard Snowflake virtual warehouse.
 
     ## When to use a Snowpark-optimized warehouse
-    [Snowpark](# "overview-of-warehouses") workloads can be run on both Standard and Snowpark-optimized warehouses. Snowpark-optimized warehouses are recommended for workloads that have large memory requirements such as ML training use cases using a stored procedure on a single virtual warehouse node. Initial creation and resumption of a Snowpark-optimized virtual warehouse may take longer than standard warehouses. Additionally, Snowpark workloads, utilizing UDF or UDTF, may also benefit from Snowpark-optimized warehouses.
+    [Snowpark](# "Snowpark is a new feature offered by Snowflake that allows developers to use their preferred programming languages to build, optimize, and execute data workloads within Snowflake. Snowpark provides a unified API that abstracts away the complexities of SQL, allowing you to write code that is more readable, maintainable, and reusable.") workloads can be run on both Standard and Snowpark-optimized warehouses. Snowpark-optimized warehouses are recommended for workloads that have large memory requirements such as ML training use cases using a stored procedure on a single virtual warehouse node. Initial creation and resumption of a Snowpark-optimized virtual warehouse may take longer than standard warehouses. Additionally, Snowpark workloads, utilizing UDF or UDTF, may also benefit from Snowpark-optimized warehouses.
 
     Creating a Snowpark-optimized warehouse
-    Use the warehouse_type property in the CREATE WAREHOUSE command to create a new Snowpark-optimized warehouse.
+    Use the warehouse_type property in the `CREATE WAREHOUSE` command to create a new Snowpark-optimized warehouse.
 
     Create a new Snowpark-optimized warehouse snowpark_opt_wh:
-
+    ```sql
     CREATE OR REPLACE WAREHOUSE snowpark_opt_wh WITH
       WAREHOUSE_SIZE = 'MEDIUM'
       WAREHOUSE_TYPE = 'SNOWPARK-OPTIMIZED';
-
+    ```
+    ---
 </details>
 
 
