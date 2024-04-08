@@ -1,37 +1,18 @@
 # Snowflake Notes
 
-## Table Content
 - [Snowflake Notes](#snowflake-notes)
-  - [Table Content](#table-content)
   - [Virtual warehouses](#virtual-warehouses)
   - [Overview of warehouses](#overview-of-warehouses)
   - [Warehouse size](#warehouse-size)
+  - [Snowpark-optimized warehouses](#snowpark-optimized-warehouses)
+    - [When to use a Snowpark-optimized warehouse](#when-to-use-a-snowpark-optimized-warehouse)
 
 ## Virtual warehouses
-A virtual warehouse in Snowflake is a `cluster of compute resources` that you can use to execute queries and process data. It's called a "virtual" warehouse because you don't manage the underlying hardware or infrastructure. Instead, you create a virtual warehouse and then use it to process your data. A virtual warehouse is available in two types:
+A virtual warehouse in Snowflake is a **cluster of compute resources** that you can use to execute queries and process data. It's called a "virtual" warehouse because you don't manage the underlying hardware or infrastructure. Instead, you create a virtual warehouse and then use it to process your data. A virtual warehouse is available in two types:
 
 - Standard
 
-- <details>
-  <summary>Snowpark-optimized</summary>
-
-    ## Snowpark-optimized warehouses
-    Snowpark-optimized warehouses which provide `16x memory per node` compared to a standard Snowflake virtual warehouse.
-
-    ## When to use a Snowpark-optimized warehouse
-    [Snowpark](# "Snowpark is a new feature offered by Snowflake that allows developers to use their preferred programming languages to build, optimize, and execute data workloads within Snowflake. Snowpark provides a unified API that abstracts away the complexities of SQL, allowing you to write code that is more readable, maintainable, and reusable.") workloads can be run on both Standard and Snowpark-optimized warehouses. Snowpark-optimized warehouses are recommended for workloads that have large memory requirements such as ML training use cases using a stored procedure on a single virtual warehouse node. Initial creation and resumption of a Snowpark-optimized virtual warehouse may take longer than standard warehouses. Additionally, Snowpark workloads, utilizing UDF or UDTF, may also benefit from Snowpark-optimized warehouses.
-
-    Creating a Snowpark-optimized warehouse
-    Use the warehouse_type property in the `CREATE WAREHOUSE` command to create a new Snowpark-optimized warehouse.
-
-    Create a new Snowpark-optimized warehouse snowpark_opt_wh:
-    ```sql
-    CREATE OR REPLACE WAREHOUSE snowpark_opt_wh WITH
-      WAREHOUSE_SIZE = 'MEDIUM'
-      WAREHOUSE_TYPE = 'SNOWPARK-OPTIMIZED';
-    ```
-    ---
-</details>
+- [Snowpark-optimized](#snowpark-optimized-warehouses)
 
 
 A warehouse provides the required resources, such as CPU, memory, and temporary storage, to perform the following operations in a Snowflake session:
@@ -52,7 +33,7 @@ Warehouses can be started and stopped at any time. They can also be resized at a
 ## Warehouse size
 
 | Warehouse Size | Credits / Hour | Credits / Second | Notes |
-| -------------- | -------------- | ---------------- | ----- |
+| :--------------: | :--------------: | :----------------: | ----- |
 | X-Small | 1 | 0.0003 | Default size for warehouses created in Snowsight and using CREATE WAREHOUSE. |
 | Small | 2 | 0.0006 
 | Medium | 4 | 0.0011
@@ -74,8 +55,22 @@ Warehouses can be started and stopped at any time. They can also be resized at a
 > Multi-cluster warehouses are an Enterprise Edition feature
 
 
+## Snowpark-optimized warehouses
+Snowpark-optimized warehouses which provide **16x memory per node** compared to a standard Snowflake virtual warehouse.
 
+### When to use a Snowpark-optimized warehouse
+[Snowpark](# "Snowpark is a new feature offered by Snowflake that allows developers to use their preferred programming languages to build, optimize, and execute data workloads within Snowflake. Snowpark provides a unified API that abstracts away the complexities of SQL, allowing you to write code that is more readable, maintainable, and reusable.") workloads can be run on both Standard and Snowpark-optimized warehouses. Snowpark-optimized warehouses are recommended for workloads that have large memory requirements such as ML training use cases using a stored procedure on a single virtual warehouse node. Initial creation and resumption of a Snowpark-optimized virtual warehouse may take longer than standard warehouses. Additionally, Snowpark workloads, utilizing [UDF](# "You can write user-defined functions (UDFs) to extend the system to perform operations that are not available through the built-in system-defined functions provided by Snowflake. Once you create a UDF, you can reuse it multiple times.") or [UDTF](# "A UDTF is a user-defined function (UDF) that returns tabular results."), may also benefit from Snowpark-optimized warehouses.
 
+Creating a Snowpark-optimized warehouse
+Use the `warehouse_type` property in the [CREATE WAREHOUSE](https://docs.snowflake.com/en/sql-reference/sql/create-warehouse) command to create a new Snowpark-optimized warehouse.
+
+- Create a new Snowpark-optimized warehouse snowpark_opt_wh:
+  ```sql
+  CREATE OR REPLACE WAREHOUSE snowpark_opt_wh WITH
+    WAREHOUSE_SIZE = 'MEDIUM'
+    WAREHOUSE_TYPE = 'SNOWPARK-OPTIMIZED';
+  ```
+---
 
 ![data warehouse](https://www.snowflake.com/wp-content/uploads/2018/07/architecture-imageg4.png)
 
